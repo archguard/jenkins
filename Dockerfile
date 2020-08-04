@@ -9,6 +9,9 @@ ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
 
 COPY plugins.txt /usr/share/jenkins/plugins.txt
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/plugins.txt
+ARG DEPENDENCY_ANALYZER_PLUGIN_URL="http://ec2-68-79-38-105.cn-northwest-1.compute.amazonaws.com.cn:8080/job/dependency-plugin/lastSuccessfulBuild/artifact/target/dependency-analyzer-plugin.hpi"
+RUN /usr/local/bin/install-plugins.sh dependency-analyzer:1.0:${DEPENDENCY_ANALYZER_PLUGIN_URL}
+
 USER root
 RUN apt-get update \
     && apt-get install -qqy apt-transport-https ca-certificates curl gnupg2 software-properties-common 
@@ -21,5 +24,5 @@ RUN apt-get update  -qq \
     && apt-get install docker-ce -y
 RUN usermod -aG docker jenkins
 RUN apt-get clean
-RUN curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose
+RUN curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose
 USER jenkins
