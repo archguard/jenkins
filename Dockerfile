@@ -13,11 +13,12 @@ ARG DEPENDENCY_ANALYZER_PLUGIN_URL="http://ec2-68-79-38-105.cn-northwest-1.compu
 RUN /usr/local/bin/install-plugins.sh dependency-analyzer:1.0:${DEPENDENCY_ANALYZER_PLUGIN_URL}
 
 USER root
+RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
 RUN apt-get update \
     && apt-get install -qqy apt-transport-https ca-certificates curl gnupg2 software-properties-common 
-RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
+RUN curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/debian/gpg | apt-key add -
 RUN add-apt-repository \
-   "deb [arch=amd64] https://download.docker.com/linux/debian \
+   "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/debian \
    $(lsb_release -cs) \
    stable"
 RUN apt-get update  -qq \
