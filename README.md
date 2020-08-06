@@ -28,5 +28,5 @@ java -jar jenkins-cli.jar -s http://localhost:18070/ restart
 ```
 ## Pull
 ```
-docker pull archguard/jenkins:lastest
+docker pull archguard/jenkins:latest
 ```
