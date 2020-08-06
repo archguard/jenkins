@@ -19,6 +19,14 @@ docker run \
   -p 18070:8080 \
   -p 50000:50000 \
   -v ~/jenkins-data:/var/jenkins_home \
-  -v /var/run/docker.sock:/var/run/docker.sock \
   archguard/jenkins:lastest
+```
+如果插件没有生效，重启jenkins：
+从<http://localhost:18070/jnlpJars/jenkins-cli.jar>下载jenkins-cli.jar
+```
+java -jar jenkins-cli.jar -s http://localhost:18070/ restart
+```
+## Pull
+```
+docker pull archguard/jenkins:lastest
 ```
