@@ -9,8 +9,8 @@ ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
 
 COPY plugins.txt /usr/share/jenkins/plugins.txt
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/plugins.txt
-ARG DEPENDENCY_ANALYZER_PLUGIN_URL="http://ec2-68-79-38-105.cn-northwest-1.compute.amazonaws.com.cn:8080/job/dependency-plugin/lastSuccessfulBuild/artifact/target/dependency-analyzer-plugin.hpi"
-RUN /usr/local/bin/install-plugins.sh dependency-analyzer:1.0:${DEPENDENCY_ANALYZER_PLUGIN_URL}
+# ARG DEPENDENCY_ANALYZER_PLUGIN_URL="http://ec2-68-79-38-105.cn-northwest-1.compute.amazonaws.com.cn:8080/job/dependency-plugin/lastSuccessfulBuild/artifact/target/dependency-analyzer-plugin.hpi"
+# RUN /usr/local/bin/install-plugins.sh dependency-analyzer:1.0:${DEPENDENCY_ANALYZER_PLUGIN_URL}
 
 USER root
 RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
